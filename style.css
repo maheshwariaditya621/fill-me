@@ -1213,80 +1213,50 @@ input:checked+.card-content {
     }
 }
 
-/* Footer & Premium Links */
+/* Footer Adjustments */
 .site-footer {
     width: 100%;
-    padding: 2.5rem 1rem;
+    padding: 2rem 1rem;
     text-align: center;
+    font-size: 0.9rem;
     color: var(--text-muted);
     background: transparent;
     margin-top: auto;
+    /* Push to bottom of flex container */
     position: relative;
     z-index: 10;
 }
 
-.footer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    margin: 0.5rem 0;
-}
-
-.footer-link-premium {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.75rem;
-    color: var(--primary);
-    text-decoration: none;
-    padding: 0.4rem 0.8rem;
-    background: rgba(37, 99, 235, 0.05);
-    border: 1px solid rgba(37, 99, 235, 0.1);
-    border-radius: 20px;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    font-weight: 500;
-}
-
-.footer-link-premium:hover {
-    background: var(--primary);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-}
-
-.footer-link-premium svg {
-    transition: transform 0.2s ease;
-}
-
-.footer-link-premium:hover svg {
-    transform: translateY(1px);
-}
-
-.site-footer p {
-    font-size: 0.75rem;
-    margin: 0.1rem 0;
-    opacity: 0.8;
+/* Hybrid: Fixed Footer ONLY for Landing Page (No Scroll) */
+/* Body mode specific footer behaviors */
+body.landing-mode .site-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin-top: 0;
 }
 
 @media (max-width: 768px) {
+
+    /* Local footers inside sections are now relative flex items */
     .site-footer {
+        position: relative;
         padding: 1.5rem 1rem;
+        width: 100%;
+        margin-top: auto;
+        /* Push to bottom of flex section */
+        background: transparent;
+        z-index: 10;
+        box-sizing: border-box;
     }
 
-    .footer-link-premium {
-        padding: 0.5rem 1rem;
-        /* Slightly larger targets for mobile */
+    .site-footer p {
+        font-size: 0.7rem;
+        margin: 0.1rem 0;
+        color: var(--text-muted);
     }
 }
-
 
 
 
