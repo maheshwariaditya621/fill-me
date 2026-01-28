@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Fill Me - A Premium Form Developer</title>
+    <title>FillMe - A Premium Form Developer</title>
     <meta name="description" content="A high-performance and premium data collection platform.">
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,22 +33,33 @@
                     <path d="M9 10H15M9 14H13" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                     <circle cx="17" cy="7" r="2" fill="currentColor" />
                 </svg>
-                <span class="brand-text">Fill Me</span>
+                <span class="brand-text">FillMe</span>
             </div>
         </header>
 
         <div class="hero-content">
-            <h1 class="fade-in">Data Collection,<br>Reimagined.</h1>
-            <p class="subtitle fade-in delay-1">Simple, clean, and effective surveys for academic research.</p>
-            <button id="viewSurveyBtn" class="btn-primary fade-in delay-2">
-                <span>View Survey</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="btn-icon">
-                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-            </button>
+            <div class="hero-text-side">
+                <h1 class="fade-in">Data Collection,<br>Reimagined.</h1>
+                <p class="subtitle fade-in delay-1">Simple, clean, and effective surveys.</p>
+                <button id="viewSurveyBtn" class="btn-primary fade-in delay-2">
+                    <span>View Survey</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="btn-icon">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+            <div class="hero-image-side fade-in delay-1">
+                <img src="/static/platform-hero.png" alt="Form Platform Illustration" class="hero-image">
+            </div>
         </div>
+
+        <footer class="site-footer">
+            <p>&copy; 2026 FillMe. All rights reserved.</p>
+            <p class="designer-credit">Designed and engineered by Aditya Maheshwari</p>
+        </footer>
     </section>
+
 
     <!-- PAGE 2: SURVEY INTRO -->
     <section id="surveyIntroPage" class="page-section" style="display: none;">
@@ -72,21 +83,14 @@
                     <path d="M9 10H15M9 14H13" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                     <circle cx="17" cy="7" r="2" fill="currentColor" />
                 </svg>
-                <span class="brand-text">Fill Me</span>
+                <span class="brand-text">FillMe</span>
             </div>
         </header>
 
         <div class="intro-content">
             <div class="survey-card fade-in">
-                <div class="card-icon-container">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                        <polyline points="14 2 14 8 20 8"></polyline>
-                        <line x1="16" y1="13" x2="8" y2="13"></line>
-                        <line x1="16" y1="17" x2="8" y2="17"></line>
-                        <polyline points="10 9 9 9 8 9"></polyline>
-                    </svg>
+                <div class="intro-visual-container fade-in">
+                    <img src="/static/intro-bag.png" alt="Quick Commerce" class="intro-card-image">
                 </div>
 
                 <h1>Quick Commerce Impact Survey</h1>
@@ -95,8 +99,7 @@
 
                 <div class="info-pills">
                     <span class="pill">⏱ 3–5 min</span>
-                    <span class="pill">🔒 Confidential</span>
-                    <span class="pill highlight">🎓 Academic Research</span>
+                    <span class="pill highlight">🔒 Confidential</span>
                 </div>
 
                 <button id="startSurveyBtn" class="btn-primary">
@@ -109,7 +112,13 @@
                 </button>
             </div>
         </div>
+
+        <footer class="site-footer">
+            <p>&copy; 2026 FillMe. All rights reserved.</p>
+            <p class="designer-credit">Designed and engineered by Aditya Maheshwari</p>
+        </footer>
     </section>
+
 
     <!-- PAGE 3: SURVEY FORM (Existing Form) -->
     <section id="surveyFormPage" class="page-section" style="display: none;">
@@ -133,7 +142,7 @@
                     <path d="M9 10H15M9 14H13" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                     <circle cx="17" cy="7" r="2" fill="currentColor" />
                 </svg>
-                <span class="brand-text">Fill Me</span>
+                <span class="brand-text">FillMe</span>
             </div>
         </header>
 
@@ -147,7 +156,10 @@
                 <!-- STEP 1: Section A -->
                 <div class="form-step active" data-step="1">
                     <div class="step-header">
-                        <span class="step-tag">Section A</span>
+                        <div class="step-meta">
+                            <span class="step-tag">Section A</span>
+                            <img src="/static/speed-icon.png" alt="Icon" class="step-inline-icon">
+                        </div>
                         <h2>About You</h2>
                         <p>Let's start with some basic details.</p>
                     </div>
@@ -196,7 +208,10 @@
                 <!-- STEP 2: Section B -->
                 <div class="form-step" data-step="2">
                     <div class="step-header">
-                        <span class="step-tag">Section B</span>
+                        <div class="step-meta">
+                            <span class="step-tag">Section B</span>
+                            <img src="/static/basket-icon.png" alt="Icon" class="step-inline-icon">
+                        </div>
                         <h2>Awareness & Usage</h2>
                     </div>
 
@@ -288,7 +303,10 @@
                 <!-- STEP 3: Section C -->
                 <div class="form-step" data-step="3">
                     <div class="step-header">
-                        <span class="step-tag">Section C</span>
+                        <div class="step-meta">
+                            <span class="step-tag">Section C</span>
+                            <img src="/static/arrival-icon.png" alt="Icon" class="step-inline-icon">
+                        </div>
                         <h2>Value & Time</h2>
                     </div>
 
@@ -604,14 +622,15 @@
                 </div>
             </div>
         </div>
+
+        <footer class="site-footer">
+            <p>&copy; 2026 FillMe. All rights reserved.</p>
+            <p class="designer-credit">Designed and engineered by Aditya Maheshwari</p>
+        </footer>
     </section>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <p>&copy; 2026 Fill Me. All rights reserved.</p>
-        <p class="designer-credit">Designed and engineered by Aditya Maheshwari</p>
-        <p class="academic-note">Academic research project</p>
-    </footer>
+
+    <!-- Global footer removed in favor of section-local footers -->
 
     <script src="/static/script.js"></script>
 </body>

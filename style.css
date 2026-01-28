@@ -26,16 +26,102 @@ body {
     align-items: center;
 }
 
+/* Mobile adjustments for landing page */
+@media (max-width: 768px) {
+    body.landing-mode {
+        height: 100dvh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        /* Pins footer at the absolute bottom */
+    }
+
+    #landingPage {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        /* Flow from top */
+        align-items: center;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .hero-content {
+        padding: 0 1.5rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        /* Keeps text at the top */
+        align-items: center;
+        gap: 0;
+        /* Removing gap to pull image higher via margin */
+        margin-top: 0;
+    }
+
+
+
+
+
+    .hero-text-side {
+        order: 1;
+        text-align: center;
+        width: 100%;
+    }
+
+    .hero-image-side {
+        order: 2;
+        margin-top: -5.5rem;
+        /* Heavily pulling the image up */
+        display: flex;
+        justify-content: center;
+        position: relative;
+        z-index: 5;
+    }
+
+
+
+
+    .hero-image {
+        max-height: 32dvh;
+        /* Increased significantly to fill empty space */
+        width: auto;
+        object-fit: contain;
+        border-radius: 20px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    }
+
+
+    .hero-content h1 {
+        font-size: 1.6rem;
+        margin-top: 0;
+        margin-bottom: 0.25rem;
+        line-height: 1.1;
+    }
+
+    .hero-content .subtitle {
+        font-size: 0.85rem;
+        margin-bottom: 0.75rem;
+        max-width: 240px;
+    }
+}
+
+
+
+
 /* Progress Bar */
 .progress-container {
     width: 100%;
     max-width: 600px;
-    height: 4px;
+    height: 6px;
     background-color: var(--border-color);
     border-radius: 4px;
     margin-bottom: 2rem;
     position: relative;
     overflow: hidden;
+    /* Increase visibility */
 }
 
 .progress-bar {
@@ -43,23 +129,6 @@ body {
     background-color: var(--primary);
     width: 0%;
     transition: width 0.4s ease;
-}
-
-/* Hero Section */
-.hero-section {
-    width: 100%;
-    min-height: 90vh;
-    /* Almost full screen */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 2rem;
-    background: radial-gradient(circle at top, #EFF6FF, #F8FAFC);
-    border-bottom: 1px solid var(--border-color);
-    box-sizing: border-box;
-    position: relative;
 }
 
 .brand-logo {
@@ -338,9 +407,49 @@ body {
 /* Landing Hero */
 .hero-content {
     z-index: 1;
-    text-align: center;
-    max-width: 700px;
-    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    max-width: 1100px;
+    padding: 0 4rem;
+    width: 100%;
+}
+
+.hero-text-side {
+    flex: 1.2;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.hero-image-side {
+    flex: 0.8;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.hero-image {
+    max-width: 450px;
+    width: 100%;
+    height: auto;
+    border-radius: 40px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+    animation: floatImage 6s infinite ease-in-out;
+}
+
+@keyframes floatImage {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(1deg);
+    }
 }
 
 .hero-content h1 {
@@ -363,8 +472,6 @@ body {
     margin-bottom: 3.5rem;
     font-weight: 400;
     max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 /* Button with Icon */
@@ -894,6 +1001,73 @@ input:checked+.card-content {
     box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
 }
 
+/* Image & Visual Enhancements - GLOBAL SCOPE */
+.intro-visual-container {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.intro-card-image {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.1));
+    animation: pulseIcon 4s infinite ease-in-out;
+}
+
+@keyframes pulseIcon {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.step-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.step-inline-icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
+}
+
+/* Responsive Overrides */
+@media (max-width: 900px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+        padding-top: 5rem;
+    }
+
+    .hero-text-side {
+        text-align: center;
+        align-items: center;
+    }
+
+    .hero-image {
+        max-width: 320px;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+}
+
+
 /* Comprehensive Mobile Optimization */
 @media (max-width: 600px) {
 
@@ -917,11 +1091,13 @@ input:checked+.card-content {
         position: relative;
         top: 0;
         left: 0;
-        padding: 1.5rem 1rem;
+        padding: 1rem 1.5rem;
+        /* Tighter padding */
         gap: 0.75rem;
         width: 100%;
         box-sizing: border-box;
         justify-content: flex-start;
+        z-index: 100;
     }
 
     .brand-icon {
@@ -1031,63 +1207,89 @@ input:checked+.card-content {
         max-width: 100%;
     }
 
-    /* Footer Tweak */
-    .site-footer {
-        padding: 2rem 1rem;
-        position: relative;
-        /* Ensure it stays at the end of content */
-    }
-
-    .site-footer p {
-        font-size: 0.75rem;
-    }
-
-    .page-section {
-        min-height: auto;
-        padding-top: 0;
-        overflow: visible;
-    }
-
-    #landingPage {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        overflow: hidden;
-    }
-
-    /* Hide blobs if they cause horizontal jitter */
-    .blob {
-        display: none;
+    .intro-card-image {
+        width: 140px;
+        height: 140px;
     }
 }
 
-/* Footer Adjustments */
+/* Footer & Premium Links */
 .site-footer {
     width: 100%;
-    padding: 2rem 1rem;
+    padding: 2.5rem 1rem;
     text-align: center;
-    font-size: 0.9rem;
     color: var(--text-muted);
     background: transparent;
     margin-top: auto;
-    /* Push to bottom of flex container */
     position: relative;
     z-index: 10;
 }
 
-/* Hybrid: Fixed Footer ONLY for Landing Page (No Scroll) */
-body.landing-mode .site-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    margin-top: 0;
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0.5rem 0;
+}
+
+.footer-link-premium {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--primary);
+    text-decoration: none;
+    padding: 0.4rem 0.8rem;
+    background: rgba(37, 99, 235, 0.05);
+    border: 1px solid rgba(37, 99, 235, 0.1);
+    border-radius: 20px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
+}
+
+.footer-link-premium:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.footer-link-premium svg {
+    transition: transform 0.2s ease;
+}
+
+.footer-link-premium:hover svg {
+    transform: translateY(1px);
 }
 
 .site-footer p {
-    margin: 0.25rem 0;
+    font-size: 0.75rem;
+    margin: 0.1rem 0;
+    opacity: 0.8;
 }
+
+@media (max-width: 768px) {
+    .site-footer {
+        padding: 1.5rem 1rem;
+    }
+
+    .footer-link-premium {
+        padding: 0.5rem 1rem;
+        /* Slightly larger targets for mobile */
+    }
+}
+
+
+
+
 
 .designer-credit {
     font-weight: 700;
