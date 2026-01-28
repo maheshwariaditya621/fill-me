@@ -1,0 +1,408 @@
+================================================================
+FILE: requirements.txt
+================================================================
+fastapi
+uvicorn[standard]
+sqlalchemy
+pymysql
+pydantic>=2.0
+pandas
+openpyxl
+python-multipart
+
+================================================================
+FILE: database.py
+================================================================
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+import os
+
+# ⚠️ UPDATE THESE CREDENTIALS FOR YOUR MARIADB SERVER
+# Format: mysql+pymysql://<username>:<password>@<host>:<port>/<database_name>
+# Example: mysql+pymysql://root:password@localhost:3306/survey_db
+SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root:password@localhost:3306/survey_db"
+
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL,
+    pool_pre_ping=True,  # Handles extensive connection drops
+    pool_recycle=3600    # Recycles connections every hour
+)
+
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+Base = declarative_base()
+
+# Dependency for API endpoints
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+================================================================
+FILE: models.py
+================================================================
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, Text, JSON
+from sqlalchemy.sql import func
+from database import Base
+
+class SurveyResponse(Base):
+    __tablename__ = "survey_responses"
+
+    # Metadata
+    id = Column(Integer, primary_key=True, index=True)
+    submitted_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    # SECTION A: RESPONDENT DETAILS
+    full_name = Column(String(255), nullable=False)
+    email = Column(String(255), nullable=False)  # Q2: Email
+    age_group = Column(String(50), nullable=False)  # Q3
+    household_type = Column(String(50), nullable=False)  # Q4
+
+    # SECTION B: QUICK COMMERCE AWARENESS & USAGE
+    awareness = Column(Boolean, nullable=False)  # Q5
+    platforms_used = Column(JSON, nullable=False)  # Q6: Multi-select (JSON List)
+    most_used_platform = Column(String(100), nullable=False)  # Q7
+    usage_frequency = Column(String(50), nullable=False)  # Q8
+
+    # SECTION C: ORDER VALUE & TIME FACTOR
+    average_order_value = Column(String(50), nullable=False)  # Q9
+    time_saved = Column(String(50), nullable=False)  # Q10
+
+    # SECTION D: HOUSEHOLD CONSUMPTION BEHAVIOUR
+    product_categories = Column(JSON, nullable=False)  # Q11: Multi-select (JSON List)
+    purchase_frequency_change = Column(String(50), nullable=False)  # Q12
+    impulse_buying = Column(String(50), nullable=False)  # Q13: Likert/Agree
+
+    # SECTION E: PRICE SENSITIVITY & LOCAL SHOPS
+    price_sensitivity = Column(Integer, nullable=False)  # Q14: 1-5
+    price_comparison = Column(String(50), nullable=False)  # Q15
+    local_shops_impact = Column(String(50), nullable=False)  # Q16
+
+    # SECTION F: FACTORS INFLUENCING PREFERENCE (Table)
+    # Storing each factor as a separate column for easier SQL analysis
+    importance_delivery = Column(String(50), nullable=False)
+    importance_convenience = Column(String(50), nullable=False)
+    importance_pricing = Column(String(50), nullable=False)
+    importance_availability = Column(String(50), nullable=False)
+
+    # SECTION G: OVERALL PERCEPTION
+    overall_satisfaction = Column(String(50), nullable=False)  # Q18
+    future_usage_intent = Column(String(50), nullable=False)  # Q19
+
+    # SECTION H: OPEN-ENDED
+    qualitative_response = Column(Text, nullable=True)  # Q20
+
+================================================================
+FILE: schemas.py
+================================================================
+from pydantic import BaseModel, EmailStr, Field, validator
+from typing import List, Optional
+from enum import Enum
+
+# --- ENUMS FOR STRICT VALIDATION ---
+
+class AgeGroup(str, Enum):
+    BELOW_20 = "Below 20"
+    RANGE_20_30 = "20–30"
+    RANGE_31_40 = "31–40"
+    RANGE_41_50 = "41–50"
+    ABOVE_50 = "Above 50"
+
+class HouseholdType(str, Enum):
+    NUCLEAR = "Nuclear family"
+    JOINT = "Joint family"
+    LIVING_ALONE = "Living alone"
+
+class Platform(str, Enum):
+    ZEPTO = "Zepto"
+    BLINKIT = "Blinkit"
+    SWIGGY = "Swiggy Instamart"
+    BIGBASKET = "BigBasket Now"
+    OTHERS = "Others"
+
+class UsageFrequency(str, Enum):
+    DAILY = "Daily"
+    TWO_THREE_TIMES = "2–3 times a week"
+    ONCE_A_WEEK = "Once a week"
+    OCCASIONALLY = "Occasionally"
+    RARELY = "Rarely"
+
+class OrderValue(str, Enum):
+    BELOW_300 = "Below ₹300"
+    RANGE_300_600 = "₹300–₹600"
+    RANGE_600_1000 = "₹600–₹1000"
+    ABOVE_1000 = "Above ₹1000"
+
+class TimeSaved(str, Enum):
+    LESS_15 = "Less than 15 minutes"
+    RANGE_15_30 = "15–30 minutes"
+    RANGE_30_60 = "30–60 minutes"
+    MORE_1H = "More than 1 hour"
+
+class ProductCategory(str, Enum):
+    GROCERIES = "Groceries & staples"
+    DAIRY = "Dairy & bakery"
+    SNACKS = "Snacks & beverages"
+    PERSONAL_CARE = "Personal care items"
+    EMERGENCY = "Emergency / last-minute items"
+
+class PurchaseFreqChange(str, Enum):
+    INC_SIGNIFICANT = "Increasing significantly"
+    INC_SLIGHT = "Increasing slightly"
+    NO_CHANGE = "No change"
+    REDUCING = "Reducing"
+
+class LikertAgree(str, Enum):
+    STRONGLY_AGREE = "Strongly agree"
+    AGREE = "Agree"
+    NEUTRAL = "Neutral"
+    DISAGREE = "Disagree"
+    STRONGLY_DISAGREE = "Strongly disagree"
+
+class PriceComparison(str, Enum):
+    MUCH_HIGHER = "Much higher"
+    SLIGHTLY_HIGHER = "Sliightly higher" # Note: Typo in questionnaire might exist, sticking to safe strings
+    ALMOST_SAME = "Almost the same"
+    SLIGHTLY_LOWER = "Slightly lower"
+    MUCH_LOWER = "Much lower"
+    # Fallback to handle exact string requested if typo was unintentional
+    SLIGHTLY_HIGHER_FIXED = "Slightly higher"
+
+class LocalShopImpact(str, Enum):
+    YES_SIG = "Yes, significantly"
+    YES_SOME = "Yes, to some extent"
+    NO_CHANGE = "No change"
+    INCREASED = "Increased visits to local shops"
+
+class ImportanceRating(str, Enum):
+    VERY_IMP = "Very Important"
+    IMPORTANT = "Important"
+    NEUTRAL = "Neutral"
+    NOT_IMP = "Not Important"
+
+class Satisfaction(str, Enum):
+    VERY_SAT = "Very satisfied"
+    SATISFIED = "Satisfied"
+    NEUTRAL = "Neutral"
+    DISSATISFIED = "Dissatisfied"
+    VERY_DISSATISFIED = "Very dissatisfied"
+
+class FutureUsage(str, Enum):
+    YES = "Yes"
+    NO = "No"
+    NOT_SURE = "Not sure"
+
+# --- PYDANTIC MODEL ---
+
+class SurveyResponseBase(BaseModel):
+    # Section A
+    full_name: str = Field(..., min_length=1)
+    email: EmailStr
+    age_group: AgeGroup
+    household_type: HouseholdType
+
+    # Section B
+    awareness: bool
+    platforms_used: List[str]  # We allow raw strings but frontend usually sends from a set.
+    most_used_platform: str # Can be "Others", so not strict Enum if user types custom
+    usage_frequency: UsageFrequency
+
+    # Section C
+    average_order_value: OrderValue
+    time_saved: TimeSaved
+
+    # Section D
+    product_categories: List[str]
+    purchase_frequency_change: PurchaseFreqChange
+    impulse_buying: LikertAgree
+
+    # Section E
+    price_sensitivity: int = Field(..., ge=1, le=5)
+    price_comparison: str # Using str to allow flexibility if Enum varies slightly
+    local_shops_impact: LocalShopImpact
+
+    # Section F
+    importance_delivery: ImportanceRating
+    importance_convenience: ImportanceRating
+    importance_pricing: ImportanceRating
+    importance_availability: ImportanceRating
+
+    # Section G
+    overall_satisfaction: Satisfaction
+    future_usage_intent: FutureUsage
+
+    # Section H
+    qualitative_response: Optional[str] = None
+
+    @validator('platforms_used', 'product_categories')
+    def must_not_be_empty(cls, v):
+        if not v:
+            raise ValueError('Must select at least one option')
+        return v
+
+class SurveyResponseCreate(SurveyResponseBase):
+    pass
+
+class SurveyResponseOut(SurveyResponseBase):
+    id: int
+    submitted_at: str 
+
+    class Config:
+        orm_mode = True
+        # Pydantic v2 use from_attributes = True
+        from_attributes = True
+
+================================================================
+FILE: crud.py
+================================================================
+from sqlalchemy.orm import Session
+import models, schemas
+import json
+
+def create_survey_response(db: Session, response: schemas.SurveyResponseCreate):
+    # Convert lists to JSON for storage
+    db_response = models.SurveyResponse(
+        full_name=response.full_name,
+        email=response.email,
+        age_group=response.age_group.value,
+        household_type=response.household_type.value,
+        awareness=response.awareness,
+        platforms_used=response.platforms_used,  # SQLAlchemy JSON type handles list automatically
+        most_used_platform=response.most_used_platform,
+        usage_frequency=response.usage_frequency.value,
+        average_order_value=response.average_order_value.value,
+        time_saved=response.time_saved.value,
+        product_categories=response.product_categories, # SQLAlchemy JSON type handles list automatically
+        purchase_frequency_change=response.purchase_frequency_change.value,
+        impulse_buying=response.impulse_buying.value,
+        price_sensitivity=response.price_sensitivity,
+        price_comparison=response.price_comparison,
+        local_shops_impact=response.local_shops_impact.value,
+        importance_delivery=response.importance_delivery.value,
+        importance_convenience=response.importance_convenience.value,
+        importance_pricing=response.importance_pricing.value,
+        importance_availability=response.importance_availability.value,
+        overall_satisfaction=response.overall_satisfaction.value,
+        future_usage_intent=response.future_usage_intent.value,
+        qualitative_response=response.qualitative_response
+    )
+    db.add(db_response)
+    db.commit()
+    db.refresh(db_response)
+    return db_response
+
+def get_responses(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.SurveyResponse).offset(skip).limit(limit).all()
+
+def get_all_responses_for_export(db: Session):
+    return db.query(models.SurveyResponse).all()
+
+================================================================
+FILE: main.py
+================================================================
+from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy.orm import Session
+import pandas as pd
+from io import BytesIO
+from fastapi.responses import StreamingResponse
+import models, schemas, crud, database
+
+# Create tables if they don't exist
+models.Base.metadata.create_all(bind=database.engine)
+
+app = FastAPI(
+    title="Quick Commerce Survey API",
+    description="Backend API for collecting survey responses.",
+    version="1.0.0"
+)
+
+# CORS (Allow all for development flexibility)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.post("/submit-response", response_model=schemas.SurveyResponseOut, status_code=status.HTTP_201_CREATED)
+def submit_response(response: schemas.SurveyResponseCreate, db: Session = Depends(database.get_db)):
+    """
+    Submit a new survey response.
+    Validates all inputs against the questionnaire schema.
+    """
+    try:
+        return crud.create_survey_response(db=db, response=response)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/responses", response_model=list[schemas.SurveyResponseOut])
+def read_responses(skip: int = 0, limit: int = 100, db: Session = Depends(database.get_db)):
+    """
+    Get all responses (Admin use).
+    """
+    return crud.get_responses(db, skip=skip, limit=limit)
+
+@app.get("/export-excel")
+def export_excel(db: Session = Depends(database.get_db)):
+    """
+    Export all data to an Excel file (.xlsx) for analysis.
+    User-friendly headers are preserved.
+    """
+    responses = crud.get_all_responses_for_export(db)
+    
+    if not responses:
+        raise HTTPException(status_code=404, detail="No responses found to export.")
+
+    # Convert to standard dict list
+    data = []
+    for r in responses:
+        data.append({
+            "ID": r.id,
+            "Submitted At": r.submitted_at,
+            "Name": r.full_name,
+            "Email": r.email,
+            "Age Group": r.age_group,
+            "Household Type": r.household_type,
+            "Awareness": "Yes" if r.awareness else "No",
+            "Platforms Used": ", ".join(r.platforms_used) if r.platforms_used else "",
+            "Most Used Platform": r.most_used_platform,
+            "Usage Frequency": r.usage_frequency,
+            "Avg Order Value": r.average_order_value,
+            "Time Saved": r.time_saved,
+            "Categories": ", ".join(r.product_categories) if r.product_categories else "",
+            "Purchase Freq Change": r.purchase_frequency_change,
+            "Impulse Buying": r.impulse_buying,
+            "Price Sensitivity": r.price_sensitivity,
+            "Price Comparison": r.price_comparison,
+            "Local Shop Impact": r.local_shops_impact,
+            "Imp Delivery": r.importance_delivery,
+            "Imp Convenience": r.importance_convenience,
+            "Imp Pricing": r.importance_pricing,
+            "Imp Availability": r.importance_availability,
+            "Satisfaction": r.overall_satisfaction,
+            "Future Intent": r.future_usage_intent,
+            "Qualitative": r.qualitative_response
+        })
+
+    df = pd.DataFrame(data)
+    
+    # Create valid Excel file in memory
+    output = BytesIO()
+    with pd.ExcelWriter(output, engine='openpyxl') as writer:
+        df.to_excel(writer, index=False, sheet_name="Survey Responses")
+    
+    output.seek(0)
+    
+    headers = {
+        'Content-Disposition': 'attachment; filename="survey_responses.xlsx"'
+    }
+    return StreamingResponse(output, headers=headers, media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+
+@app.get("/")
+def root():
+    return {"message": "Survey API is running. Go to /docs for Swagger UI."}

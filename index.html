@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Fill Me - A Premium Form Developer</title>
+    <meta name="description" content="A high-performance and premium data collection platform.">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+
+
+    <!-- PAGE 1: PLATFORM LANDING -->
+    <section id="landingPage" class="page-section active">
+        <!-- Background Graphics -->
+        <div class="background-graphics">
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="graph-line"></div>
+        </div>
+
+        <header class="app-header landing-header">
+            <div class="brand-container">
+                <svg class="brand-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="2" />
+                    <path d="M9 10H15M9 14H13" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    <circle cx="17" cy="7" r="2" fill="currentColor" />
+                </svg>
+                <span class="brand-text">Fill Me</span>
+            </div>
+        </header>
+
+        <div class="hero-content">
+            <h1 class="fade-in">Data Collection,<br>Reimagined.</h1>
+            <p class="subtitle fade-in delay-1">Simple, clean, and effective surveys for academic research.</p>
+            <button id="viewSurveyBtn" class="btn-primary fade-in delay-2">
+                <span>View Survey</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="btn-icon">
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- PAGE 2: SURVEY INTRO -->
+    <section id="surveyIntroPage" class="page-section" style="display: none;">
+        <!-- Background Graphics (Reused for consistency) -->
+        <div class="background-graphics">
+            <div class="blob blob-1" style="top: -20%; right: -20%; opacity: 0.4;"></div>
+            <div class="blob blob-2" style="bottom: -20%; left: -20%; opacity: 0.4;"></div>
+        </div>
+
+        <header class="app-header landing-header">
+            <button class="btn-icon-only back-btn" onclick="history.back()" aria-label="Go Back">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <div class="brand-container clickable" onclick="window.location.hash=''">
+                <svg class="brand-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="2" />
+                    <path d="M9 10H15M9 14H13" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    <circle cx="17" cy="7" r="2" fill="currentColor" />
+                </svg>
+                <span class="brand-text">Fill Me</span>
+            </div>
+        </header>
+
+        <div class="intro-content">
+            <div class="survey-card fade-in">
+                <div class="card-icon-container">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                </div>
+
+                <h1>Quick Commerce Impact Survey</h1>
+                <p class="project-title">A specialized study on how rapid delivery services influence household
+                    consumption patterns.</p>
+
+                <div class="info-pills">
+                    <span class="pill">⏱ 3–5 min</span>
+                    <span class="pill">🔒 Confidential</span>
+                    <span class="pill highlight">🎓 Academic Research</span>
+                </div>
+
+                <button id="startSurveyBtn" class="btn-primary">
+                    Start Survey
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" class="btn-icon">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGE 3: SURVEY FORM (Existing Form) -->
+    <section id="surveyFormPage" class="page-section" style="display: none;">
+        <!-- Background Graphics (Consistent) -->
+        <div class="background-graphics">
+            <div class="blob blob-1" style="top: -20%; right: -20%; opacity: 0.3;"></div>
+            <div class="blob blob-2" style="bottom: -20%; left: -20%; opacity: 0.3;"></div>
+        </div>
+
+        <header class="app-header landing-header">
+            <button class="btn-icon-only back-btn" onclick="history.back()" aria-label="Go Back">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+            </button>
+            <div class="brand-container clickable" onclick="window.location.hash=''">
+                <svg class="brand-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="2" />
+                    <path d="M9 10H15M9 14H13" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    <circle cx="17" cy="7" r="2" fill="currentColor" />
+                </svg>
+                <span class="brand-text">Fill Me</span>
+            </div>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="main-container">
+            <form id="surveyForm">
+                <!-- STEP 1: Section A -->
+                <div class="form-step active" data-step="1">
+                    <div class="step-header">
+                        <span class="step-tag">Section A</span>
+                        <h2>About You</h2>
+                        <p>Let's start with some basic details.</p>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="full_name">1. Full Name <span class="required-star">*</span></label>
+                        <input type="text" id="full_name" name="full_name" placeholder="Jane Doe" required>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="email">2. Email Address <span class="required-star">*</span></label>
+                        <input type="email" id="email" name="email" placeholder="jane@example.com" required>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="age_group">3. Age Group <span class="required-star">*</span></label>
+                        <div class="select-wrapper">
+                            <select id="age_group" name="age_group" required>
+                                <option value="" disabled selected>Select your age group</option>
+                                <option value="Below 20">Below 20</option>
+                                <option value="20–30">20–30</option>
+                                <option value="31–40">31–40</option>
+                                <option value="41–50">41–50</option>
+                                <option value="Above 50">Above 50</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="household_type">4. Household Type <span class="required-star">*</span></label>
+                        <div class="select-wrapper">
+                            <select id="household_type" name="household_type" required>
+                                <option value="" disabled selected>Select household type</option>
+                                <option value="Nuclear family">Nuclear family</option>
+                                <option value="Joint family">Joint family</option>
+                                <option value="Living alone">Living alone</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button type="button" class="btn-next">Next</button>
+                    </div>
+                </div>
+
+                <!-- STEP 2: Section B -->
+                <div class="form-step" data-step="2">
+                    <div class="step-header">
+                        <span class="step-tag">Section B</span>
+                        <h2>Awareness & Usage</h2>
+                    </div>
+
+                    <div class="question-group">
+                        <label>5. Are you aware of quick commerce platforms? <span
+                                class="required-star">*</span></label>
+                        <div class="radio-cards">
+                            <label class="radio-card">
+                                <input type="radio" name="awareness" value="true" required>
+                                <div class="card-content">Yes</div>
+                            </label>
+                            <label class="radio-card">
+                                <input type="radio" name="awareness" value="false">
+                                <div class="card-content">No</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label>6. Which platforms have you used? (Select all that apply) <span
+                                class="required-star">*</span></label>
+                        <p id="platforms_error" class="error-message-inline" style="display: none;">⚠️ Please select at
+                            least one platform</p>
+                        <div class="checkbox-cards" id="platforms_used">
+                            <label class="checkbox-card">
+                                <input type="checkbox" value="Zepto">
+                                <div class="card-content">Zepto</div>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox" value="Blinkit">
+                                <div class="card-content">Blinkit</div>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox" value="Swiggy Instamart">
+                                <div class="card-content">Swiggy Instamart</div>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox" value="BigBasket Now">
+                                <div class="card-content">BigBasket Now</div>
+                            </label>
+                            <label class="checkbox-card">
+                                <input type="checkbox" value="Others">
+                                <div class="card-content">Others</div>
+                            </label>
+                        </div>
+
+                        <div id="other_platform_container" class="hidden-input-container">
+                            <input type="text" id="other_platform_name" name="other_platform_name"
+                                placeholder="Please specify other platform">
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="most_used_platform">7. Which platform do you use the most? <span
+                                class="required-star">*</span></label>
+                        <div class="select-wrapper">
+                            <select id="most_used_platform" name="most_used_platform" required>
+                                <option value="" disabled selected>Select Platform</option>
+                                <option value="Zepto">Zepto</option>
+                                <option value="Blinkit">Blinkit</option>
+                                <option value="Swiggy Instamart">Swiggy Instamart</option>
+                                <option value="BigBasket Now">BigBasket Now</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="usage_frequency">8. How often do you use these platforms? <span
+                                class="required-star">*</span></label>
+                        <div class="select-wrapper">
+                            <select id="usage_frequency" name="usage_frequency" required>
+                                <option value="" disabled selected>Select Frequency</option>
+                                <option value="Daily">Daily</option>
+                                <option value="2–3 times a week">2–3 times a week</option>
+                                <option value="Once a week">Once a week</option>
+                                <option value="Occasionally">Occasionally</option>
+                                <option value="Rarely">Rarely</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button type="button" class="btn-prev">Back</button>
+                        <button type="button" class="btn-next">Next</button>
+                    </div>
+                </div>
+
+                <!-- STEP 3: Section C -->
+                <div class="form-step" data-step="3">
+                    <div class="step-header">
+                        <span class="step-tag">Section C</span>
+                        <h2>Value & Time</h2>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="average_order_value">9. Average order value <span
+                                class="required-star">*</span></label>
+                        <div class="select-wrapper">
+                            <select id="average_order_value" name="average_order_value" required>
+                                <option value="" disabled selected>Select Value</option>
+                                <option value="Below ₹300">Below ₹300</option>
+                                <option value="₹300–₹600">₹300–₹600</option>
+                                <option value="₹600–₹1000">₹600–₹1000</option>
+                                <option value="Above ₹1000">Above ₹1000</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="time_saved">10. Time saved compared to physical store <span
+                                class="required-star">*</span></label>
+                        <div class="select-wrapper">
+                            <select id="time_saved" name="time_saved" required>
+                                <option value="" disabled selected>Select Time Saved</option>
+                                <option value="Less than 15 minutes">Less than 15 minutes</option>
+                                <option value="15–30 minutes">15–30 minutes</option>
+                                <option value="30–60 minutes">30–60 minutes</option>
+                                <option value="More than 1 hour">More than 1 hour</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button type="button" class="btn-prev">Back</button>
+                        <button type="button" class="btn-next">Next</button>
+                    </div>
+                </div>
+
+                <!-- STEP 4: Section D -->
+                <div class="form-step" data-step="4">
+                    <div class="step-header">
+                        <span class="step-tag">Section D</span>
+                        <h2>Consumption Behaviour</h2>
+                    </div>
+
+                    <div class="question-group">
+                        <label>11. Product categories ordered (Select all that apply) <span
+                                class="required-star">*</span></label>
+                        <p id="categories_error" class="error-message-inline" style="display: none;">⚠️ Please select at
+                            least one category</p>
+                        <div class="checkbox-cards" id="product_categories">
+                            <label class="checkbox-card small">
+                                <input type="checkbox" value="Groceries & staples">
+                                <div class="card-content">Groceries</div>
+                            </label>
+                            <label class="checkbox-card small">
+                                <input type="checkbox" value="Dairy & bakery">
+                                <div class="card-content">Dairy & Bakery</div>
+                            </label>
+                            <label class="checkbox-card small">
+                                <input type="checkbox" value="Snacks & beverages">
+                                <div class="card-content">Snacks</div>
+                            </label>
+                            <label class="checkbox-card small">
+                                <input type="checkbox" value="Personal care items">
+                                <div class="card-content">Personal Care</div>
+                            </label>
+                            <label class="checkbox-card small">
+                                <input type="checkbox" value="Emergency / last-minute items">
+                                <div class="card-content">Emergency Items</div>
+                            </label>
+                            <label class="checkbox-card small">
+                                <input type="checkbox" value="Electronics & accessories">
+                                <div class="card-content">Electronics</div>
+                            </label>
+                            <label class="checkbox-card small">
+                                <input type="checkbox" value="Household essentials">
+                                <div class="card-content">Household</div>
+                            </label>
+                            <label class="checkbox-card small">
+                                <input type="checkbox" value="Stationery & office supplies">
+                                <div class="card-content">Stationery</div>
+                            </label>
+                            <label class="checkbox-card small">
+                                <input type="checkbox" value="Medicines & health products">
+                                <div class="card-content">Medicines</div>
+                            </label>
+                            <label class="checkbox-card small">
+                                <input type="checkbox" value="Pet supplies">
+                                <div class="card-content">Pet Supplies</div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="purchase_frequency_change">12. Effect on overall purchase frequency vs physical
+                            stores <span class="required-star">*</span></label>
+                        <div class="select-wrapper">
+                            <select id="purchase_frequency_change" name="purchase_frequency_change" required>
+                                <option value="" disabled selected>Select Impact</option>
+                                <option value="Increasing significantly">Increasing significantly</option>
+                                <option value="Increasing slightly">Increasing slightly</option>
+                                <option value="No change">No change</option>
+                                <option value="Reducing">Reducing</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="impulse_buying">13. "Quick commerce leads to unplanned/impulse purchases." <span
+                                class="required-star">*</span></label>
+                        <div class="select-wrapper">
+                            <select id="impulse_buying" name="impulse_buying" required>
+                                <option value="" disabled selected>Select Agreement</option>
+                                <option value="Strongly agree">Strongly agree</option>
+                                <option value="Agree">Agree</option>
+                                <option value="Neutral">Neutral</option>
+                                <option value="Disagree">Disagree</option>
+                                <option value="Strongly disagree">Strongly disagree</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button type="button" class="btn-prev">Back</button>
+                        <button type="button" class="btn-next">Next</button>
+                    </div>
+                </div>
+
+                <!-- STEP 5: Section E -->
+                <div class="form-step" data-step="5">
+                    <div class="step-header">
+                        <span class="step-tag">Section E</span>
+                        <h2>Price & Local Shops</h2>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="price_sensitivity">14. Price Sensitivity (1 = Not sensitive, 5 = Highly
+                            sensitive) <span class="required-star">*</span></label>
+                        <p id="price_error" class="error-message-inline" style="display: none;">⚠️ Value must be between
+                            1 and 5</p>
+                        <div class="range-wrapper">
+                            <input type="number" id="price_sensitivity" name="price_sensitivity" min="1" max="5"
+                                placeholder="Enter 1 to 5" required>
+                        </div>
+                        <p class="helper-text">1 means price doesn't matter, 5 means highly price conscious.</p>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="price_comparison">15. Price comparison vs local shops <span
+                                class="required-star">*</span></label>
+                        <div class="select-wrapper">
+                            <select id="price_comparison" name="price_comparison" required>
+                                <option value="" disabled selected>Select Comparison</option>
+                                <option value="Much higher">Much higher</option>
+                                <option value="Slightly higher">Slightly higher</option>
+                                <option value="Almost the same">Almost the same</option>
+                                <option value="Slightly lower">Slightly lower</option>
+                                <option value="Much lower">Much lower</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="local_shops_impact">16. Impact on visits to local kirana stores <span
+                                class="required-star">*</span></label>
+                        <div class="select-wrapper">
+                            <select id="local_shops_impact" name="local_shops_impact" required>
+                                <option value="" disabled selected>Select Impact</option>
+                                <option value="Yes, significantly">Yes, significantly</option>
+                                <option value="Yes, to some extent">Yes, to some extent</option>
+                                <option value="No change">No change</option>
+                                <option value="Increased visits to local shops">Increased visits to local shops</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button type="button" class="btn-prev">Back</button>
+                        <button type="button" class="btn-next">Next</button>
+                    </div>
+                </div>
+
+                <!-- STEP 6: Section F -->
+                <div class="form-step" data-step="6">
+                    <div class="step-header">
+                        <span class="step-tag">Section F</span>
+                        <h2>Preference Factors</h2>
+                        <p>Rate the importance of the following factors.</p>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="importance_delivery">17.1 Delivery Speed <span
+                                class="required-star">*</span></label>
+                        <div class="select-wrapper">
+                            <select id="importance_delivery" name="importance_delivery" required>
+                                <option value="" disabled selected>Significance</option>
+                                <option value="Very Important">Very Important</option>
+                                <option value="Important">Important</option>
+                                <option value="Neutral">Neutral</option>
+                                <option value="Not Important">Not Important</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="importance_convenience">17.2 Convenience <span
+                                class="required-star">*</span></label>
+                        <div class="select-wrapper">
+                            <select id="importance_convenience" name="importance_convenience" required>
+                                <option value="" disabled selected>Significance</option>
+                                <option value="Very Important">Very Important</option>
+                                <option value="Important">Important</option>
+                                <option value="Neutral">Neutral</option>
+                                <option value="Not Important">Not Important</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="importance_pricing">17.3 Pricing <span class="required-star">*</span></label>
+                        <div class="select-wrapper">
+                            <select id="importance_pricing" name="importance_pricing" required>
+                                <option value="" disabled selected>Significance</option>
+                                <option value="Very Important">Very Important</option>
+                                <option value="Important">Important</option>
+                                <option value="Neutral">Neutral</option>
+                                <option value="Not Important">Not Important</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="importance_availability">17.4 Product Availability <span
+                                class="required-star">*</span></label>
+                        <div class="select-wrapper">
+                            <select id="importance_availability" name="importance_availability" required>
+                                <option value="" disabled selected>Significance</option>
+                                <option value="Very Important">Very Important</option>
+                                <option value="Important">Important</option>
+                                <option value="Neutral">Neutral</option>
+                                <option value="Not Important">Not Important</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button type="button" class="btn-prev">Back</button>
+                        <button type="button" class="btn-next">Next</button>
+                    </div>
+                </div>
+
+                <!-- STEP 7: Section G & H -->
+                <div class="form-step" data-step="7">
+                    <div class="step-header">
+                        <span class="step-tag">Final</span>
+                        <h2>Overall Perception</h2>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="overall_satisfaction">18. Overall Satisfaction <span
+                                class="required-star">*</span></label>
+                        <div class="select-wrapper">
+                            <select id="overall_satisfaction" name="overall_satisfaction" required>
+                                <option value="" disabled selected>Select Satisfaction</option>
+                                <option value="Very satisfied">Very satisfied</option>
+                                <option value="Satisfied">Satisfied</option>
+                                <option value="Neutral">Neutral</option>
+                                <option value="Dissatisfied">Dissatisfied</option>
+                                <option value="Very dissatisfied">Very dissatisfied</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="future_usage_intent">19. Future Usage Intent <span
+                                class="required-star">*</span></label>
+                        <div class="select-wrapper">
+                            <select id="future_usage_intent" name="future_usage_intent" required>
+                                <option value="" disabled selected>Will you continue using it?</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                                <option value="Not sure">Not sure</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <label for="qualitative_response">20. (Optional) How has quick commerce changed your daily
+                            purchase
+                            planning?</label>
+                        <textarea id="qualitative_response" name="qualitative_response" rows="4"
+                            placeholder="Share your thoughts..."></textarea>
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button type="button" class="btn-prev">Back</button>
+                        <button type="submit" class="btn-submit" id="submitBtn">Submit Survey</button>
+                    </div>
+                    <div id="error-message" class="error-banner" style="display:none;"></div>
+                </div>
+            </form>
+
+            <!-- Success View -->
+            <div id="successView" class="success-container" style="display:none;">
+                <div class="success-icon">✓</div>
+                <h2>Your Contribution Matters!</h2>
+                <p>Thank you for taking the time to share your valuable insights.</p>
+                <p class="sub-text">Your input plays a crucial role in helping us understand how rapid delivery services
+                    are reshaping our daily lives.</p>
+                <div class="success-actions">
+                    <button onclick="location.reload()" class="btn-reset">Submit Another Response</button>
+                    <button onclick="window.location.href='/'" class="btn-secondary-link">Back to Home</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>&copy; 2026 Fill Me. All rights reserved.</p>
+        <p class="designer-credit">Designed and engineered by Aditya Maheshwari</p>
+        <p class="academic-note">Academic research project</p>
+    </footer>
+
+    <script src="/static/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,1128 @@
+/* Base Variables */
+:root {
+    --primary: #2563EB;
+    --primary-hover: #1D4ED8;
+    --bg-color: #F8FAFC;
+    --text-main: #0F172A;
+    --text-muted: #64748B;
+    --border-color: #E2E8F0;
+    --card-bg: #FFFFFF;
+    --accent-success: #22C55E;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+    --radius: 16px;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+    padding: 0;
+    /* Removing global padding to allow full-width hero */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Progress Bar */
+.progress-container {
+    width: 100%;
+    max-width: 600px;
+    height: 4px;
+    background-color: var(--border-color);
+    border-radius: 4px;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--primary);
+    width: 0%;
+    transition: width 0.4s ease;
+}
+
+/* Hero Section */
+.hero-section {
+    width: 100%;
+    min-height: 90vh;
+    /* Almost full screen */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    background: radial-gradient(circle at top, #EFF6FF, #F8FAFC);
+    border-bottom: 1px solid var(--border-color);
+    box-sizing: border-box;
+    position: relative;
+}
+
+.brand-logo {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--primary);
+    letter-spacing: -0.03em;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+    max-width: 800px;
+}
+
+.hero-content .subtitle {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+    line-height: 1.6;
+}
+
+.context-pill {
+    display: inline-block;
+    background: #F1F5F9;
+    color: var(--text-muted);
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+.btn-start {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 99px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 25px -5px rgba(37, 99, 235, 0.2);
+    background-color: var(--primary-hover);
+}
+
+
+
+/* Main Container - Update padding */
+.main-container {
+    width: 100%;
+    max-width: 650px;
+    padding: 4rem 1.5rem;
+    /* Add vertical breathing room */
+}
+
+/* Page Sections */
+.page-section {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    /* Prevent scrolling within sections */
+}
+
+/* Landing Page Specifics - Full Screen & No Scroll */
+#landingPage {
+    height: 100vh;
+    overflow: hidden;
+    color: var(--text-main);
+    background: radial-gradient(circle at top right, #F1F5F9, #F8FAFC, #FFFFFF);
+}
+
+.page-section.active {
+    display: flex;
+}
+
+/* Background Graphics */
+.background-graphics {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.blob {
+    position: absolute;
+    filter: blur(80px);
+    opacity: 0.6;
+    animation: floatBlob 10s infinite alternate ease-in-out;
+}
+
+.blob-1 {
+    width: 400px;
+    height: 400px;
+    background: rgba(37, 99, 235, 0.15);
+    /* Primary Blue tint */
+    top: -100px;
+    right: -100px;
+}
+
+.blob-2 {
+    width: 300px;
+    height: 300px;
+    background: rgba(34, 197, 94, 0.1);
+    /* Success Green tint */
+    bottom: -50px;
+    left: -50px;
+    animation-delay: -5s;
+}
+
+/* Abstract Graph Line */
+.graph-line {
+    position: absolute;
+    bottom: 20%;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background:
+        linear-gradient(to right, transparent 0%, rgba(37, 99, 235, 0.05) 50%, transparent 100%),
+        repeating-linear-gradient(90deg, transparent 0, transparent 40px, rgba(0, 0, 0, 0.03) 40px, rgba(0, 0, 0, 0.03) 41px);
+    transform: skewY(-5deg);
+    z-index: 0;
+}
+
+@keyframes floatBlob {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(20px, 40px) scale(1.1);
+    }
+}
+
+/* Landing Header */
+.app-header.landing-header {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    width: auto;
+    z-index: 10;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    /* Space between back button and brand */
+}
+
+.brand-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: opacity 0.2s ease;
+}
+
+.brand-container.clickable {
+    cursor: pointer;
+}
+
+.brand-container.clickable:hover {
+    opacity: 0.7;
+}
+
+/* Back Button Styles */
+.back-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    /* Ensures svg is centered */
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.back-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    /* Subtle hover background */
+    transform: translateX(-2px);
+    /* Slight bump left */
+}
+
+/* Ensure branding on Page 2/3 uses the correct flex layout from landing styles */
+#surveyIntroPage .app-header,
+#surveyFormPage .app-header {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    width: auto;
+    z-index: 10;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    /* Ensure gap applies here too */
+}
+
+.brand-icon {
+    width: 48px;
+    /* Increased from 32px */
+    height: 48px;
+    color: var(--primary);
+}
+
+.brand-text {
+    font-weight: 800;
+    font-size: 2.5rem;
+    /* Increased from 1.5rem */
+    color: var(--text-main);
+    letter-spacing: -0.04em;
+}
+
+/* ... (Hero styles unchanged) ... */
+
+/* Footer Adjustments */
+.site-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+    /* Slightly larger */
+    color: var(--text-muted);
+    background: transparent;
+    z-index: 50;
+    pointer-events: none;
+}
+
+.site-footer p {
+    margin: 0.25rem 0;
+}
+
+.designer-credit {
+    font-weight: 700;
+    /* Bold as requested */
+    color: var(--text-main);
+    /* Darker text for contrast */
+}
+
+/* Add padding to Survey/Intro pages so content doesn't get hidden behind fixed footer */
+#surveyIntroPage,
+#surveyFormPage {
+    padding-bottom: 6rem;
+    /* Increased padding */
+}
+
+/* Landing Hero */
+.hero-content {
+    z-index: 1;
+    text-align: center;
+    max-width: 700px;
+    padding: 0 1rem;
+}
+
+.hero-content h1 {
+    font-size: 4.5rem;
+    /* Larger and bolder */
+    line-height: 1.1;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--text-main) 0%, #475569 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.hero-content .subtitle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    margin-bottom: 3.5rem;
+    font-weight: 400;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Button with Icon */
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 99px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.2), 0 2px 4px -1px rgba(37, 99, 235, 0.1);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.3), 0 10px 10px -5px rgba(37, 99, 235, 0.1);
+    background-color: var(--primary-hover);
+}
+
+.btn-icon {
+    transition: transform 0.3s ease;
+}
+
+.btn-primary:hover .btn-icon {
+    transform: translateX(4px);
+}
+
+/* Introduction Card (Page 2) */
+.intro-content {
+    width: 100%;
+    max-width: 650px;
+    z-index: 1;
+    padding: 0 1rem;
+}
+
+.survey-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 3.5rem 2.5rem;
+    border-radius: 24px;
+    box-shadow:
+        0 20px 40px -5px rgba(37, 99, 235, 0.1),
+        0 8px 10px -6px rgba(0, 0, 0, 0.05),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.survey-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0 25px 50px -12px rgba(37, 99, 235, 0.15),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+}
+
+.card-icon-container {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%);
+    color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    margin-top: -1rem;
+    box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1);
+    opacity: 0;
+    animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.1s;
+}
+
+.survey-card h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.2s;
+}
+
+.project-title {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.3s;
+}
+
+/* Info Pills */
+.info-pills {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.4s;
+}
+
+.pill {
+    background: #F8FAFC;
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    transition: all 0.2s ease;
+    cursor: default;
+}
+
+.pill:hover {
+    background: #FFF;
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.pill.highlight {
+    background: #F0FDF4;
+    color: #166534;
+    border-color: #BBF7D0;
+}
+
+.pill.highlight:hover {
+    background: #DCFCE7;
+    border-color: #166534;
+    transform: translateY(-2px);
+}
+
+/* Animations Keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 99px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 25px -5px rgba(37, 99, 235, 0.2);
+    background-color: var(--primary-hover);
+}
+
+/* Helper Animations */
+.fade-in {
+    opacity: 0;
+    animation: simpleFadeIn 0.8s forwards;
+}
+
+.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.delay-2 {
+    animation-delay: 0.4s;
+}
+
+@keyframes simpleFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Progress Bar Container Adjustment */
+.progress-container {
+    width: 100%;
+    max-width: 600px;
+    height: 6px;
+    background-color: #E2E8F0;
+    border-radius: 99px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.main-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 0;
+}
+
+
+
+/* Forms Steps */
+.form-step {
+    display: none;
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    animation: fadeIn 0.4s ease;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.form-step.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Typography */
+.step-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.step-tag {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.05em;
+}
+
+h2 {
+    margin: 0.5rem 0 0.5rem 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* Inputs & Labels */
+.question-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.required-star {
+    color: #EF4444;
+    margin-left: 4px;
+}
+
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text-main);
+    transition: all 0.2s;
+    box-sizing: border-box;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Custom Select */
+.select-wrapper {
+    position: relative;
+}
+
+select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    color: var(--text-main);
+    appearance: none;
+    background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748B' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E") no-repeat right 1rem center;
+    background-size: 1.25em;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+/* Radio & Checkbox Cards */
+.radio-cards,
+.checkbox-cards {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.radio-card,
+.checkbox-card {
+    position: relative;
+    cursor: pointer;
+}
+
+.radio-card input,
+.checkbox-card input {
+    position: absolute;
+    opacity: 0;
+}
+
+.card-content {
+    background: #fff;
+    border: 1px solid var(--border-color);
+    padding: 0.8rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    user-select: none;
+}
+
+/* Checked State */
+input:checked+.card-content {
+    background: #EFF6FF;
+    /* primary light */
+    border-color: var(--primary);
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.checkbox-card.small .card-content {
+    font-size: 0.85rem;
+    padding: 0.6rem;
+}
+
+/* Hidden Input for "Others" */
+.hidden-input-container {
+    display: none;
+    margin-top: 1rem;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Navigation Buttons */
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+.btn-next,
+.btn-submit {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s;
+    margin-left: auto;
+    /* Push to right */
+}
+
+.btn-next:hover,
+.btn-submit:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-prev {
+    background-color: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.btn-prev:hover {
+    background-color: #F1F5F9;
+    color: var(--text-main);
+}
+
+/* Success View */
+.success-container {
+    background: var(--card-bg);
+    padding: 3rem 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.success-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--accent-success);
+    color: white;
+    border-radius: 50%;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem auto;
+}
+
+.sub-text {
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+.success-actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-reset {
+    background: transparent;
+    color: var(--primary);
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 0.95rem;
+}
+
+.btn-reset:hover {
+    color: var(--primary-hover);
+}
+
+.btn-secondary-link {
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+.btn-secondary-link:hover {
+    background: #F8FAFC;
+    border-color: var(--text-main);
+}
+
+.helper-text {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+    font-weight: 400;
+}
+
+.error-banner {
+    background-color: #FEF2F2;
+    color: #991B1B;
+    padding: 0.8rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    border: 1px solid #FECACA;
+}
+
+.error-message-inline {
+    color: #EF4444;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.input-error {
+    border-color: #EF4444 !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+}
+
+/* Comprehensive Mobile Optimization */
+@media (max-width: 600px) {
+
+    html,
+    body {
+        overflow-x: hidden;
+        position: relative;
+        width: 100%;
+    }
+
+    body {
+        padding: 0;
+        display: block;
+        /* Remove flex for more stable scrolling */
+    }
+
+    /* Landing Header & Branding Refinement - Make it relative for stability */
+    .app-header.landing-header,
+    #surveyIntroPage .app-header,
+    #surveyFormPage .app-header {
+        position: relative;
+        top: 0;
+        left: 0;
+        padding: 1.5rem 1rem;
+        gap: 0.75rem;
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: flex-start;
+    }
+
+    .brand-icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .brand-text {
+        font-size: 1.3rem;
+    }
+
+    .back-btn {
+        padding: 0.4rem;
+    }
+
+    /* Hero Text Scaling */
+    .hero-content {
+        padding: 4rem 1rem;
+        min-height: auto;
+    }
+
+    .hero-content h1 {
+        font-size: 2.25rem;
+        padding: 0 0.5rem;
+        line-height: 1.2;
+    }
+
+    .hero-content .subtitle {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+        padding: 0 1rem;
+    }
+
+    /* Card & Container Spacing */
+    .main-container {
+        padding: 1rem 1rem 4rem 1rem;
+    }
+
+    .survey-card {
+        padding: 2.5rem 1.25rem;
+        border-radius: 20px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .form-step {
+        padding: 1.5rem 1rem;
+        border-radius: 12px;
+        margin: 0 0.5rem;
+    }
+
+    .progress-container {
+        max-width: calc(100% - 2rem);
+        margin: 1rem auto;
+    }
+
+    .step-header h2 {
+        font-size: 1.5rem;
+    }
+
+    /* Navigation Buttons */
+    .nav-buttons {
+        gap: 0.75rem;
+        flex-direction: row;
+        /* Keep buttons side-by-side */
+    }
+
+    .btn-next,
+    .btn-submit,
+    .btn-prev {
+        padding: 0.7rem 1.1rem;
+        font-size: 0.9rem;
+        flex: 1;
+        /* Equal width buttons */
+        text-align: center;
+    }
+
+    /* Question Grid */
+    .radio-cards,
+    .checkbox-cards {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        width: 100%;
+    }
+
+    .card-content {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    /* Fix Dropdown Disappearing Issue */
+    .select-wrapper select {
+        font-size: 16px;
+        /* Prevents auto-zoom on iOS which causes layout jump */
+        padding: 0.8rem 1rem;
+    }
+
+    /* Success Page Actions */
+    .success-actions {
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+    }
+
+    .btn-secondary-link {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Footer Tweak */
+    .site-footer {
+        padding: 2rem 1rem;
+        position: relative;
+        /* Ensure it stays at the end of content */
+    }
+
+    .site-footer p {
+        font-size: 0.75rem;
+    }
+
+    .page-section {
+        min-height: auto;
+        padding-top: 0;
+        overflow: visible;
+    }
+
+    #landingPage {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    /* Hide blobs if they cause horizontal jitter */
+    .blob {
+        display: none;
+    }
+}
+
+/* Footer Adjustments */
+.site-footer {
+    width: 100%;
+    padding: 2rem 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    background: transparent;
+    margin-top: auto;
+    /* Push to bottom of flex container */
+    position: relative;
+    z-index: 10;
+}
+
+/* Hybrid: Fixed Footer ONLY for Landing Page (No Scroll) */
+body.landing-mode .site-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin-top: 0;
+}
+
+.site-footer p {
+    margin: 0.25rem 0;
+}
+
+.designer-credit {
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+/* Add padding to Survey/Intro pages so content doesn't touch the footer immediately */
+#surveyIntroPage,
+#surveyFormPage {
+    padding-bottom: 2rem;
+    /* Reset to normal padding */
+}
+
+/* Ensure branding on Page 2/3 uses the correct flex layout from landing styles */
+#surveyIntroPage .app-header,
+#surveyFormPage .app-header {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    width: auto;
+    z-index: 10;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+@media (max-width: 600px) {
+
+    #surveyIntroPage .app-header,
+    #surveyFormPage .app-header {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 1.5rem 1rem;
+    }
+}

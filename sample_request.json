@@ -1,0 +1,31 @@
+{
+  "full_name": "Aditya Test",
+  "email": "aditya@example.com",
+  "age_group": "20–30",
+  "household_type": "Nuclear family",
+  "awareness": true,
+  "platforms_used": [
+    "Zepto",
+    "Blinkit"
+  ],
+  "most_used_platform": "Zepto",
+  "usage_frequency": "2–3 times a week",
+  "average_order_value": "₹300–₹600",
+  "time_saved": "15–30 minutes",
+  "product_categories": [
+    "Groceries & staples",
+    "Snacks & beverages"
+  ],
+  "purchase_frequency_change": "Increasing slightly",
+  "impulse_buying": "Agree",
+  "price_sensitivity": 4,
+  "price_comparison": "Slightly higher",
+  "local_shops_impact": "Yes, to some extent",
+  "importance_delivery": "Very Important",
+  "importance_convenience": "Very Important",
+  "importance_pricing": "Important",
+  "importance_availability": "Important",
+  "overall_satisfaction": "Satisfied",
+  "future_usage_intent": "Yes",
+  "qualitative_response": "Great service but delivery fee is high."
+}
