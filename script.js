@@ -230,10 +230,20 @@ document.addEventListener('DOMContentLoaded', function () {
     // Form Submission
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
+        console.log("Form submission attempted.");
 
         // Final validation
-        if (!validateStep(currentStepIndex)) return;
+        if (!validateStep(currentStepIndex)) {
+            console.warn("Validation failed on step " + currentStepIndex);
+            // Shake the form or show a generic toast if needed, but reportValidity should handle it.
+            // Force focus on the first invalid input just in case
+            const currentStep = steps[currentStepIndex];
+            const invalidInput = currentStep.querySelector(':invalid');
+            if (invalidInput) invalidInput.focus();
+            return;
+        }
 
+        console.log("Validation passed. Submitting...");
         const submitBtn = document.getElementById('submitBtn');
         const errorMsg = document.getElementById('error-message');
 

@@ -73,8 +73,8 @@ body {
 
     .hero-image-side {
         order: 2;
-        margin-top: -5.5rem;
-        /* Heavily pulling the image up */
+        margin-top: -2rem;
+        /* Reduced negative margin */
         display: flex;
         justify-content: center;
         position: relative;
@@ -85,12 +85,16 @@ body {
 
 
     .hero-image {
-        max-height: 32dvh;
-        /* Increased significantly to fill empty space */
+        max-height: 42dvh;
+        /* Adjusted to fit without scroll */
         width: auto;
+        max-width: 85%;
         object-fit: contain;
-        border-radius: 20px;
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        border-radius: 0;
+        box-shadow: none;
+        filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.15));
+        margin-bottom: 3rem;
+        /* Push footer down, prevent overlap */
     }
 
 
@@ -105,6 +109,15 @@ body {
         font-size: 0.85rem;
         margin-bottom: 0.75rem;
         max-width: 240px;
+    }
+
+    .brand-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .brand-text {
+        font-size: 1.5rem;
     }
 }
 
@@ -354,15 +367,15 @@ body {
 }
 
 .brand-icon {
-    width: 48px;
-    /* Increased from 32px */
-    height: 48px;
+    width: 60px;
+    /* Increased size */
+    height: 60px;
     color: var(--primary);
 }
 
 .brand-text {
     font-weight: 800;
-    font-size: 2.5rem;
+    font-size: 3rem;
     /* Increased from 1.5rem */
     color: var(--text-main);
     letter-spacing: -0.04em;
@@ -435,22 +448,13 @@ body {
     max-width: 450px;
     width: 100%;
     height: auto;
-    border-radius: 40px;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
-    animation: floatImage 6s infinite ease-in-out;
+    border-radius: 0;
+    box-shadow: none;
+    filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.2));
+
 }
 
-@keyframes floatImage {
 
-    0%,
-    100% {
-        transform: translateY(0) rotate(0deg);
-    }
-
-    50% {
-        transform: translateY(-20px) rotate(1deg);
-    }
-}
 
 .hero-content h1 {
     font-size: 4.5rem;
@@ -469,7 +473,7 @@ body {
 .hero-content .subtitle {
     font-size: 1.25rem;
     color: var(--text-muted);
-    margin-bottom: 3.5rem;
+    margin: 0 0 3.5rem 0;
     font-weight: 400;
     max-width: 500px;
 }
@@ -618,6 +622,22 @@ body {
     transform: translateY(-2px);
 }
 
+/* Survey Intro Visuals */
+.intro-visual-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.intro-card-image {
+    max-width: 600px;
+    height: auto;
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.12));
+    animation: none !important;
+    /* Ensure static */
+}
+
 /* Animations Keyframes */
 @keyframes fadeInUp {
     from {
@@ -636,7 +656,7 @@ body {
     background-color: var(--primary);
     color: white;
     border: none;
-    padding: 1rem 2.5rem;
+    padding: 1rem 2.5rem 1rem 1.5rem;
     border-radius: 99px;
     font-weight: 600;
     font-size: 1.1rem;
@@ -725,7 +745,7 @@ body {
 
 .step-tag {
     text-transform: uppercase;
-    font-size: 0.75rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--primary);
     letter-spacing: 0.05em;
@@ -1010,8 +1030,9 @@ input:checked+.card-content {
 }
 
 .intro-card-image {
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    max-width: 250px;
+    height: auto;
     object-fit: contain;
     filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.1));
     animation: pulseIcon 4s infinite ease-in-out;
@@ -1032,7 +1053,7 @@ input:checked+.card-content {
 .step-meta {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     margin-bottom: 1rem;
 }
@@ -1208,8 +1229,9 @@ input:checked+.card-content {
     }
 
     .intro-card-image {
-        width: 140px;
-        height: 140px;
+        max-width: 320px;
+        width: 100%;
+        height: auto;
     }
 }
 

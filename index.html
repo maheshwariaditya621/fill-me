@@ -33,16 +33,19 @@
                     <path d="M9 10H15M9 14H13" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                     <circle cx="17" cy="7" r="2" fill="currentColor" />
                 </svg>
-                <span class="brand-text">FillMe</span>
+                <div style="display: flex; flex-direction: column; justify-content: center; line-height: 1;">
+                    <span class="brand-text" style="line-height: 1; margin: 0;">Fill<span
+                            style="font-weight: 400; font-size: 0.8em; color: black;">me</span></span>
+                </div>
             </div>
         </header>
 
         <div class="hero-content">
             <div class="hero-text-side">
-                <h1 class="fade-in">Data Collection,<br>Reimagined.</h1>
-                <p class="subtitle fade-in delay-1">Simple, clean, and effective surveys.</p>
+                <h1 class="fade-in">DATA COLLECTION<br>REIMAGINED.</h1>
+                <p class="subtitle fade-in delay-1">Collect information. Clearly & effortlessly.</p>
                 <button id="viewSurveyBtn" class="btn-primary fade-in delay-2">
-                    <span>View Survey</span>
+                    <span>Get Started</span>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" class="btn-icon">
                         <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round" stroke-linejoin="round" />
@@ -50,7 +53,7 @@
                 </button>
             </div>
             <div class="hero-image-side fade-in delay-1">
-                <img src="/static/platform-hero.png" alt="Form Platform Illustration" class="hero-image">
+                <img src="/static/platform-hero-v2-transparent.png" alt="Form Platform Illustration" class="hero-image">
             </div>
         </div>
 
@@ -83,14 +86,17 @@
                     <path d="M9 10H15M9 14H13" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                     <circle cx="17" cy="7" r="2" fill="currentColor" />
                 </svg>
-                <span class="brand-text">FillMe</span>
+                <div style="display: flex; flex-direction: column; justify-content: center; line-height: 1;">
+                    <span class="brand-text" style="line-height: 1; margin: 0;">Fill<span
+                            style="font-weight: 400; font-size: 0.8em; color: black;">me</span></span>
+                </div>
             </div>
         </header>
 
         <div class="intro-content">
             <div class="survey-card fade-in">
                 <div class="intro-visual-container fade-in">
-                    <img src="/static/intro-bag.png" alt="Quick Commerce" class="intro-card-image">
+                    <img src="/static/survey-intro-transparent.png" alt="Quick Commerce" class="intro-card-image">
                 </div>
 
                 <h1>Quick Commerce Impact Survey</h1>
@@ -142,7 +148,10 @@
                     <path d="M9 10H15M9 14H13" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                     <circle cx="17" cy="7" r="2" fill="currentColor" />
                 </svg>
-                <span class="brand-text">FillMe</span>
+                <div style="display: flex; flex-direction: column; justify-content: center; line-height: 1;">
+                    <span class="brand-text" style="line-height: 1; margin: 0;">Fill<span
+                            style="font-weight: 400; font-size: 0.8em; color: black;">me</span></span>
+                </div>
             </div>
         </header>
 
@@ -158,7 +167,7 @@
                     <div class="step-header">
                         <div class="step-meta">
                             <span class="step-tag">Section A</span>
-                            <img src="/static/speed-icon.png" alt="Icon" class="step-inline-icon">
+
                         </div>
                         <h2>About You</h2>
                         <p>Let's start with some basic details.</p>
@@ -210,7 +219,7 @@
                     <div class="step-header">
                         <div class="step-meta">
                             <span class="step-tag">Section B</span>
-                            <img src="/static/basket-icon.png" alt="Icon" class="step-inline-icon">
+
                         </div>
                         <h2>Awareness & Usage</h2>
                     </div>
@@ -305,7 +314,7 @@
                     <div class="step-header">
                         <div class="step-meta">
                             <span class="step-tag">Section C</span>
-                            <img src="/static/arrival-icon.png" alt="Icon" class="step-inline-icon">
+
                         </div>
                         <h2>Value & Time</h2>
                     </div>
@@ -415,7 +424,7 @@
                     </div>
 
                     <div class="question-group">
-                        <label for="impulse_buying">13. "Quick commerce leads to unplanned/impulse purchases." <span
+                        <label for="impulse_buying">13. Does quick commerce leads to unplanned/impulse purchases. <span
                                 class="required-star">*</span></label>
                         <div class="select-wrapper">
                             <select id="impulse_buying" name="impulse_buying" required>
@@ -443,8 +452,11 @@
                     </div>
 
                     <div class="question-group">
-                        <label for="price_sensitivity">14. Price Sensitivity (1 = Not sensitive, 5 = Highly
-                            sensitive) <span class="required-star">*</span></label>
+                        <label for="price_sensitivity">
+                            14. How sensitive is your household to price changes when shopping online? (1 = Not
+                            sensitive, 5 = Highly sensitive)
+                            <span class="required-star">*</span>
+                        </label>
                         <p id="price_error" class="error-message-inline" style="display: none;">⚠️ Value must be between
                             1 and 5</p>
                         <div class="range-wrapper">
