@@ -40,19 +40,27 @@ def submit_response(response: schemas.SurveyResponseCreate, db: Session = Depend
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+# Admin Secret Key (Change this to something secure)
+ADMIN_SECRET_KEY = "FillMe@Admin_2025"
+
 @app.get("/responses", response_model=list[schemas.SurveyResponseOut])
-def read_responses(skip: int = 0, limit: int = 100, db: Session = Depends(database.get_db)):
+def read_responses(key: str = None, skip: int = 0, limit: int = 100, db: Session = Depends(database.get_db)):
     """
     Get all responses (Admin use).
+    Requires a valid secret key.
     """
+    if key != ADMIN_SECRET_KEY:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
     return crud.get_responses(db, skip=skip, limit=limit)
 
 @app.get("/export-excel")
-def export_excel(db: Session = Depends(database.get_db)):
+def export_excel(key: str = None, db: Session = Depends(database.get_db)):
     """
     Export all data to an Excel file (.xlsx) for analysis.
-    User-friendly headers are preserved.
+    Requires a valid secret key.
     """
+    if key != ADMIN_SECRET_KEY:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Unauthorized")
     responses = crud.get_all_responses_for_export(db)
     
     if not responses:
