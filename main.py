@@ -41,7 +41,7 @@ def submit_response(response: schemas.SurveyResponseCreate, db: Session = Depend
         raise HTTPException(status_code=500, detail=str(e))
 
 # Admin Secret Key (Change this to something secure)
-ADMIN_SECRET_KEY = "FillMe@Admin_2025"
+ADMIN_SECRET_KEY = "Babyaditya#007"
 
 @app.get("/responses", response_model=list[schemas.SurveyResponseOut])
 def read_responses(key: str = None, skip: int = 0, limit: int = 100, db: Session = Depends(database.get_db)):
