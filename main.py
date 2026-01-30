@@ -113,6 +113,7 @@ def export_excel(key: str = None, db: Session = Depends(database.get_db)):
     return StreamingResponse(output, headers=headers, media_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
 
 @app.get("/")
+@app.head("/")
 @app.get("/index.html")
 def root():
     # Return index.html from the root folder
